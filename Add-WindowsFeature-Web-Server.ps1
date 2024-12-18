@@ -17,6 +17,9 @@ Set-ItemProperty `
     -Value $true
 Invoke-Expression "& '$env:WINDIR\system32\inetsrv\appcmd.exe' unlock config -section:system.applicationHost/log"
 Add-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST'  -filter "system.applicationHost/sites/site[@name='LabSite']/logFile/customFields" -name "." -value @{logFieldName='Content-Length';sourceName='Content-Length';sourceType='RequestHeader'}
+Add-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST'  -filter "system.applicationHost/sites/site[@name='LabSite']/logFile/customFields" -name "." -value @{logFieldName='Host';sourceName='Host';sourceType='RequestHeader'}
+Add-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST'  -filter "system.applicationHost/sites/site[@name='LabSite']/logFile/customFields" -name "." -value @{logFieldName='User-Agent';sourceName='UserAgent';sourceType='RequestHeader'}
+Add-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST'  -filter "system.applicationHost/sites/site[@name='LabSite']/logFile/customFields" -name "." -value @{logFieldName='X-Forwarded-For';sourceName='X-Forwarded-For';sourceType='RequestHeader'}
 Set-WebConfigurationProperty "/system.applicationHost/sites/siteDefaults" -name logfile.directory -value $logdir
 
 ##Lock IIS COnfig down.
